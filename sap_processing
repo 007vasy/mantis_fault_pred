@@ -13,7 +13,7 @@ colnames = ["internal", "customers STILL Sales Unit", "serialnumber", "service o
             "trucks production company", "truck type", "truck year of construction", "truck purchase date",
             "service technician technical comment", "service technician internal comment", "internal", "internal"]
 sap_fault = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/ServiceReportSAPExtrakt_FLMxFahrzeuge.txt',
-                        sep="\t", nrows=5000, error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1)
+                        sep="\t", error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1)
 # print sap_fault
 
 print sap_fault.describe()
