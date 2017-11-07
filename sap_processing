@@ -1,10 +1,19 @@
-#SAP txt processing method
+# SAP txt processing method
 import pandas as pd
 
-#from expert knowledge
-colnames = ["internal","customers STILL Sales Unit","serialnumber","service order number","internal SAP type of service task","internal","internal","contract number","service car number","service technician identifier","internal","customer number","customer name","equipmentnumber","operatinghours value","internal","manual entered operatinghours value after operatinghours component change","service report number","service task(s) begin","service task(s) end","internal","internal","internal","internal","internal","internal","damage type","internal","internal","internal","internal","internal","exchange part number","exchange part name","internal","internal","internal","internal","trucks production company","truck type","truck year of construction","truck purchase date","service technician technical commentf","service technician internal comment","internal","internal"]
+# from expert knowledge
+colnames = ["internal", "customers STILL Sales Unit", "serialnumber", "service order number",
+            "internal SAP type of service task", "internal", "internal", "contract number", "service car number",
+            "service technician identifier", "internal", "customer number", "customer name", "equipmentnumber",
+            "operatinghours value", "internal",
+            "manual entered operatinghours value after operatinghours component change", "service report number",
+            "service task(s) begin", "service task(s) end", "internal", "internal", "internal", "internal", "internal",
+            "internal", "damage type", "internal", "internal", "internal", "internal", "internal",
+            "exchange part number", "exchange part name", "internal", "internal", "internal", "internal",
+            "trucks production company", "truck type", "truck year of construction", "truck purchase date",
+            "service technician technical comment", "service technician internal comment", "internal", "internal"]
 sap_fault = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/ServiceReportSAPExtrakt_FLMxFahrzeuge.txt',
-                        sep="\t", nrows = 200,error_bad_lines = False,parse_dates = True, names = colnames,skiprows=1)
+                        sep="\t", nrows=5000, error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1)
 # print sap_fault
 
 print sap_fault.describe()
@@ -12,7 +21,7 @@ print sap_fault.head()
 
 cols = [c for c in sap_fault.columns if c.lower()[:8] != 'internal']
 
-sap_fault=sap_fault[cols]
+sap_fault = sap_fault[cols]
 
 print sap_fault.columns
 
