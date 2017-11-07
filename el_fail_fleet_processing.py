@@ -11,11 +11,6 @@ colnames = ["exclude", "exclude", "componentoperatingseconds", "exclude", "exclu
 electric_errors = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/xtra_All_errors_with_metainfo.txt',
                               sep="\t", nrows=5000, error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1)
 
-# electric_errors = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/xtra_All_errors_with_metainfo.txt',
-#                               sep="\t", nrows=200, error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1)
-
-# print electric_errors
-# print electric_errors.describe()
 print electric_errors.head()
 
 cols = [c for c in electric_errors.columns if c.lower()[:7] != 'exclude']
@@ -25,5 +20,4 @@ electric_errors = electric_errors[cols]
 print electric_errors.columns
 
 electric_errors.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/electric_errors.csv")
-
 
