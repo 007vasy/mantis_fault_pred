@@ -10,11 +10,14 @@ colnames = ["exclude", "exclude", "componentoperatingseconds", "exclude", "exclu
 path_to_file = '/home/vassb/fault_pred_data/xtra_All_errors_with_metainfo.txt'
 
 flag = 0
-chunksize = 10 ** 8
+chunksize = 10 ** 6
+
+print "boo!"
 
 for chunk in pd.read_csv(path_to_file,
                          sep="\t", error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1,
                          chunksize=chunksize):
+    print "process started!"
     if flag == 0:
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
