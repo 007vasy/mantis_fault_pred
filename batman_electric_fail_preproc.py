@@ -19,7 +19,7 @@ i = 1
 for chunk in pd.read_csv(path_to_file,
                          sep="\t", error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1,
                          chunksize=chunksize):
-    print "chunk "+i+" processing started!"
+    print "chunk "+str(i)+" processing started!"
     if flag == 0:
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
@@ -29,7 +29,7 @@ for chunk in pd.read_csv(path_to_file,
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
         chunk.to_csv('/home/vassb/fault_pred_data/electric_errors.csv', mode='a', header=False)
-    print "chunk "+i+" has processed!"
+    print "chunk "+str(i)+" has processed!"
     i = i+1
 print "process ready"
 #print electric_errors.head()
