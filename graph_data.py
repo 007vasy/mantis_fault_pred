@@ -9,4 +9,4 @@
         #from sap_txt.csv           where is no exchange part number technical worker comment text mining
         #from sap_xml.csv           where is no exchange part number technical worker comment text mining
 #paths
-    #directed in path which truck when arrived to that stage
+    #directed in path which truck when arrived to that stage (accommulate from the three files)
