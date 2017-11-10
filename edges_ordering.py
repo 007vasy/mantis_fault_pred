@@ -37,3 +37,5 @@ for vehicle in vehicles:
     pd.DataFrame(edges_df.get_group(vehicle)).groupby('timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
     print vehicles + "'s path is saved"
 print "grouping and ordering is ready"
+
+#get_group?
