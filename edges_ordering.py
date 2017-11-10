@@ -33,9 +33,9 @@ vehicles = edges_df[["vehicle_serialnumber"]].drop_duplicates("vehicle_serialnum
 edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 #edges_df.to_csv(export_edges_ordered,index=False)
 
-for vehicle in vehicles:
-    pd.DataFrame(edges_df.get_group(vehicle[0])).groupby('timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
-    print vehicle["vehicle_serialnumber"]
+for i in range(0,len(vehicles)):
+    pd.DataFrame(edges_df.get_group(vehicles[i])).groupby('timestamp').to_csv(export_vehicle + vehicles[i] + "_edges.csv",index=False)
+    print vehicles[i]
 print "grouping and ordering is ready"
 
 #get_group?
