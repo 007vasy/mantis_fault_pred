@@ -34,8 +34,8 @@ edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 #edges_df.to_csv(export_edges_ordered,index=False)
 
 for vehicle in vehicles:
-    #pd.DataFrame(edges_df.get_group(vehicle.split(" ")[1])).groupby('timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
-    print vehicles["vehicle_serialnumber"]
+    pd.DataFrame(edges_df.get_group(vehicle["vehicle_serialnumber"])).groupby('timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
+    print vehicle["vehicle_serialnumber"]
 print "grouping and ordering is ready"
 
 #get_group?
