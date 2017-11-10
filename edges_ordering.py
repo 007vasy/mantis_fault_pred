@@ -37,6 +37,6 @@ edges_df.to_csv(export_edges_ordered,index=False)
 vehicles = edges_df[["vehicle_serialnumber"]].drop_duplicates("vehicle_serialnumber",keep='first')
 
 for vehicle in vehicles:
-    edges_df.get_group(vehicle).to_csv(export_vehicle + "_edges.csv",index=False)
+    edges_df.get_group(vehicle).to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
     print vehicles + "'s path is saved"
 print "grouping and ordering is ready"
