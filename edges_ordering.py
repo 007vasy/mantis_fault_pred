@@ -31,9 +31,9 @@ for chunk in pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chu
 edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 #edges_df.to_csv(export_edges_ordered,index=False)
 
-vehicles = pd.DataFrame(edges_df[["vehicle_serialnumber"]]).drop_duplicates("vehicle_serialnumber",keep='first')
+vehicles = pd.DataFrame(edges_df["vehicle_serialnumber"]).drop_duplicates("vehicle_serialnumber",keep='first')
 
 for vehicle in vehicles:
-    pd.DataFrame(edges_df.get_group(vehicle)).groupby("vehicle_serialnumber",'timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
+    pd.DataFrame(edges_df.get_group(vehicle)).groupby('timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
     print vehicles + "'s path is saved"
 print "grouping and ordering is ready"
