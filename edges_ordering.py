@@ -9,28 +9,13 @@ export_edges_ordered = '/home/vassb/fault_pred_data/edges_ordered.csv'
 export_vehicle = '/home/vassb/fault_pred_data/'
 
 #big file dropping
-flag = 0
 chunksize = 10 ** 6
 
 print "boo!"
 
-i = 1
 
-for chunk in pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chunksize):
-    print "chunk " + str(i) + " processing started!"
-    if flag == 0:
-        cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
-        chunk = chunk[cols]
-        #chunk.to_csv(export_electric_erros_distinct_errors_codes)
-        flag = 1
-        edges_df = chunk
-    else:
-        cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
-        chunk = chunk[cols]
-        #chunk.to_csv(export_electric_erros_distinct_errors_codes, mode='a', header=False)
-        edges_df = pd.concat([edges_df,chunk],ignore_index=True)
-    print "chunk " + str(i) + " has processed!"
-    i = i + 1
+edges_df = pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chunksize)
+
 edges_df = edges_df.groupby(["vehicle_serialnumber",'timestamp'],sort = True)
 edges_df.to_csv(export_edges_ordered,index=False)
 
