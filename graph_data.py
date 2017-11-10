@@ -78,7 +78,6 @@ el_f_df.to_csv(export_electric_erros_distinct_errors_codes)
 print "process ready"
 #######################################################################################################################
 
-
 # big file ready
 
 sap_txt_fault = pd.read_csv(path_to_sap_txt_csv, parse_dates=True, names=colnames_sap_txt, skiprows=1)
@@ -86,8 +85,6 @@ sap_txt_fault = pd.read_csv(path_to_sap_txt_csv, parse_dates=True, names=colname
 cols = [c for c in sap_txt_fault.columns if c.lower()[:7] != 'exclude']
 
 sap_txt_fault = sap_txt_fault[cols]
-
-
 
 print sap_txt_fault.columns
 
