@@ -23,7 +23,7 @@ for chunk in pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chu
         chunk = chunk[cols]
         #chunk.to_csv(export_electric_erros_distinct_errors_codes)
         flag = 1
-        edges_df = chunk.drop_duplicates("s_errorcode")
+        edges_df = chunk
     else:
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
