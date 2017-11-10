@@ -36,8 +36,6 @@ edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 for vehicle in vehicles:
     #pd.DataFrame(edges_df.get_group(vehicle.split(" ")[1])).groupby('timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
     print vehicles + "'s path is saved"
-    print vehicles[0]
-    print vehicles[1]
 print "grouping and ordering is ready"
 
 #get_group?
