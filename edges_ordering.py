@@ -26,7 +26,7 @@ for chunk in pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chu
     print "chunk " + str(i) + " has processed!"
     i = i + 1
 edges_df = edges_df.groupby(["vehicle_serialnumber",'timestamp'],sort = False)
-edges_df.to_csv(export_edges_ordered,index=False)
+#edges_df.to_csv(export_edges_ordered,index=False)
 
 vehicles = edges_df[["vehicle_serialnumber"]].drop_duplicates("vehicle_serialnumber",keep='first')
 
