@@ -77,7 +77,7 @@ for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=co
 el_f_df.to_csv(export_electric_erros_distinct_errors_codes)
 print "process ready"
 #######################################################################################################################
-#TODOdistinct
+
 
 # big file ready
 
@@ -105,5 +105,5 @@ print sap_xml_fault.columns
 
 sap_xml_fault.to_csv(export_sap_xml_fails_codes)
 #######################################################################################################################
-sap_distinct_df = pd.concat(sap_txt_fault,sap_xml_fault).drop_duplicates()
+sap_distinct_df = pd.concat([sap_txt_fault,sap_xml_fault]).drop_duplicates()
 sap_distinct_df.to_csv(export_sap_concat_distinct_values)
