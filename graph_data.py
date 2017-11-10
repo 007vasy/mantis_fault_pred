@@ -8,7 +8,7 @@
 #        # second phase
 #            # from sap_txt.csv           where is no exchange part number technical worker comment text mining
 #            # from sap_xml.csv           where is no exchange part number technical worker comment text mining
-#    # paths
+#    # edges
 #        # directed in path which truck when arrived to that stage (accommulate from the three files)
 
 import pandas as pd

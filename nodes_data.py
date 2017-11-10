@@ -1,4 +1,13 @@
 #making nodes_df from distinct errors and fails
+# nodes
+#        # from electric_errors.csv all truck distinct all good phase (after sap state too)
+#        # first phase
+#            # from electric_errors.csv   distinct error codes
+#            # from sap_txt.csv           distinct exchange part codes
+#            # from sap_xml.csv           distinct exchange part codes
+#        # second phase
+#            # from sap_txt.csv           where is no exchange part number technical worker comment text mining
+#            # from sap_xml.csv           where is no exchange part number technical worker comment text mining
 
 import pandas as pd
 import numpy as np
@@ -9,6 +18,7 @@ import numpy as np
 # import_sap_distinct_values = "/home/vassb/fault_pred_data/distinct_sap_fails.csv"
 #
 # export_distinct_nodes = "/home/vassb/fault_pred_data/nodes.csv"
+
 #for pc
 import_electric_erros_distinct_errors_codes = "/media/vasy/Data/Doksik/Learn/thesis/fault_pred/tidy_data/distinct_electric_errors.csv"
 
