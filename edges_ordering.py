@@ -28,10 +28,10 @@ for chunk in pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chu
 #if it's too large one can read in one row at time and append for the correct vehicle CSV
 #POSSIBLE WORKAROUND
 
+vehicles = edges_df["vehicle_serialnumber"].drop_duplicates("vehicle_serialnumber",keep='first')
+
 edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 #edges_df.to_csv(export_edges_ordered,index=False)
-
-vehicles = pd.DataFrame(edges_df["vehicle_serialnumber"]).drop_duplicates("vehicle_serialnumber",keep='first')
 
 for vehicle in vehicles:
     pd.DataFrame(edges_df.get_group(vehicle)).groupby('timestamp').to_csv(export_vehicle + vehicle + "_edges.csv",index=False)
