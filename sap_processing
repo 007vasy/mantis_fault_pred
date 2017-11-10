@@ -25,4 +25,4 @@ sap_fault = sap_fault[cols]
 
 print sap_fault.columns
 
-sap_fault.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/sap_txt.csv")
+sap_fault.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/sap_txt.csv",index=False)

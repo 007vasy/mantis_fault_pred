@@ -19,4 +19,4 @@ sap_xml_fault = sap_xml_fault[cols]
 
 print sap_xml_fault.columns
 
-sap_xml_fault.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/sap_xml.csv")
+sap_xml_fault.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/sap_xml.csv",index=False)

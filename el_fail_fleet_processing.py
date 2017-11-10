@@ -23,4 +23,4 @@ electric_errors = electric_errors[cols]
 
 print electric_errors.head()
 
-electric_errors.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/electric_errors.csv")
+electric_errors.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/electric_errors.csv",index=False)

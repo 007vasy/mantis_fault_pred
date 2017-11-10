@@ -40,4 +40,4 @@ sap_fails_df = sap_fails_df.assign(node_type_e_or_f = np.ones(len(sap_fails_df.i
 
 nodes_df = pd.concat([el_er_df,sap_fails_df],ignore_index = True)
 
-nodes_df.to_csv(export_distinct_nodes)
+nodes_df.to_csv(export_distinct_nodes,index=False)

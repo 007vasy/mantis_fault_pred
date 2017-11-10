@@ -23,12 +23,12 @@ for chunk in pd.read_csv(path_to_file,
     if flag == 0:
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
-        chunk.to_csv("/home/vassb/fault_pred_data/electric_errors.csv")
+        chunk.to_csv("/home/vassb/fault_pred_data/electric_errors.csv",index=False)
         flag = 1
     else:
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
-        chunk.to_csv('/home/vassb/fault_pred_data/electric_errors.csv', mode='a', header=False)
+        chunk.to_csv('/home/vassb/fault_pred_data/electric_errors.csv', mode='a', header=False,index=False)
     print "chunk "+str(i)+" has processed!"
     i = i+1
 print "process ready"

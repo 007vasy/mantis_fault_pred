@@ -74,7 +74,7 @@ for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=co
         el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).drop_duplicates("s_errorcode",keep='first')
     print "chunk " + str(i) + " has processed!"
     i = i + 1
-el_f_df.to_csv(export_electric_erros_distinct_errors_codes)
+el_f_df.to_csv(export_electric_erros_distinct_errors_codes,index=False)
 print "process ready"
 #######################################################################################################################
 
@@ -88,7 +88,7 @@ sap_txt_fault = sap_txt_fault[cols]
 
 print sap_txt_fault.columns
 
-sap_txt_fault.to_csv(export_sap_txt_fails_codes)
+sap_txt_fault.to_csv(export_sap_txt_fails_codes,index=False)
 
 #######################################################################################################################
 
