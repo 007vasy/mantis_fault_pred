@@ -102,3 +102,4 @@ ENV/
 
 # not usefull files
 example.csv
+*.png
