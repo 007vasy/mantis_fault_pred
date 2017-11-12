@@ -30,6 +30,7 @@ for chunk in pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chu
 
 vehicles = edges_df[["vehicle_serialnumber"]].drop_duplicates("vehicle_serialnumber",keep='first').dropna(axis = 0, how= 'any')
 
+#TODO trimming spaces from vehicle ID
 edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 #edges_df.to_csv(export_edges_ordered,index=False)
 
