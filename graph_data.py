@@ -66,12 +66,12 @@ for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=co
         chunk = chunk[cols]
         #chunk.to_csv(export_electric_erros_distinct_errors_codes)
         flag = 1
-        el_f_df = chunk.drop_duplicates("s_errorcode")
+        el_f_df = chunk.dropna(how = "any").drop_duplicates("s_errorcode")
     else:
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
         #chunk.to_csv(export_electric_erros_distinct_errors_codes, mode='a', header=False)
-        el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).drop_duplicates("s_errorcode",keep='first')
+        el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).dropna(how = "any").drop_duplicates("s_errorcode",keep='first')
     print "chunk " + str(i) + " has processed!"
     i = i + 1
 el_f_df.to_csv(export_electric_erros_distinct_errors_codes,index=False)
@@ -88,7 +88,7 @@ sap_txt_fault = sap_txt_fault[cols]
 
 print sap_txt_fault.columns
 
-sap_txt_fault.to_csv(export_sap_txt_fails_codes,index=False)
+sap_txt_fault.dropna(how = "any").to_csv(export_sap_txt_fails_codes,index=False)
 
 #######################################################################################################################
 
@@ -103,4 +103,4 @@ print sap_xml_fault.columns
 sap_xml_fault.to_csv(export_sap_xml_fails_codes)
 #######################################################################################################################
 sap_distinct_df = pd.concat([sap_txt_fault,sap_xml_fault]).drop_duplicates(keep='first')
-sap_distinct_df.to_csv(export_sap_concat_distinct_values)
+sap_distinct_df.dropna(how = "any").to_csv(export_sap_concat_distinct_values)

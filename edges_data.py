@@ -25,14 +25,14 @@ for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, chunksiz
         chunk.columns = ['timestamp','to_go_node',"vehicle_serialnumber"]
         chunk = chunk.assign(fail_in=np.zeros(len(chunk.index), dtype=bool))
         chunk = chunk.assign(fail_out=np.zeros(len(chunk.index), dtype=bool))
-        chunk.to_csv(edges_unordered,index=False)
+        chunk.dropna(how = "any").to_csv(edges_unordered,index=False)
         flag = 1
     else:
         chunk = chunk[["error_occurred_timestamp","s_errorcode","vehicle_serialnumber"]]
         chunk.columns = ['timestamp', 'to_go_node', "vehicle_serialnumber"]
         chunk = chunk.assign(fail_in=np.zeros(len(chunk.index), dtype=bool))
         chunk = chunk.assign(fail_out=np.zeros(len(chunk.index), dtype=bool))
-        chunk.to_csv(edges_unordered, mode='a', header=False,index=False)
+        chunk.dropna(how = "any").to_csv(edges_unordered, mode='a', header=False,index=False)
     print "chunk " + str(i) + " has processed!"
     i = i + 1
 print chunk.columns
@@ -68,6 +68,6 @@ sap_xml_fault_edges_out = sap_xml_fault_edges_out.assign(fail_out=np.ones(len(sa
 
 #######################################################################################################################
 sap_edges = pd.concat([sap_txt_fault_edges_in,sap_txt_fault_edges_out,sap_xml_fault_edges_in,sap_xml_fault_edges_out],ignore_index = True)
-sap_edges.to_csv(edges_unordered, mode='a', header=False,index=False)
+sap_edges.dropna(how = "any").to_csv(edges_unordered, mode='a', header=False,index=False)
 
 print sap_edges.columns
