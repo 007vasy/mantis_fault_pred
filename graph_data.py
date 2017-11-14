@@ -87,7 +87,7 @@ cols = [c for c in sap_txt_fault.columns if c.lower()[:7] != 'exclude']
 sap_txt_fault = sap_txt_fault[cols]
 
 print sap_txt_fault.columns
-
+#TODO rename na exchange part number in the first phase in second phase use NLP for making sub categories
 sap_txt_fault.dropna(how = "any").to_csv(export_sap_txt_fails_codes,index=False)
 
 #######################################################################################################################
@@ -103,4 +103,5 @@ print sap_xml_fault.columns
 sap_xml_fault.to_csv(export_sap_xml_fails_codes)
 #######################################################################################################################
 sap_distinct_df = pd.concat([sap_txt_fault,sap_xml_fault]).drop_duplicates(keep='first')
+#TODO rename na exchange part number in the first phase in second phase use NLP for making sub categories
 sap_distinct_df.dropna(how = "any").to_csv(export_sap_concat_distinct_values)

@@ -29,7 +29,7 @@ for chunk in pd.read_csv(import_edges_unordered, parse_dates=True, chunksize=chu
 #POSSIBLE WORKAROUND
 edges_df[["vehicle_serialnumber"]] = edges_df[["vehicle_serialnumber"]].str.strip()
 
-vehicles = edges_df[["vehicle_serialnumber"]].drop_duplicates("vehicle_serialnumber",keep='first').dropna(axis = 0, how= 'any')
+vehicles = edges_df[["vehicle_serialnumber"]].dropna(axis = 0, how= 'any').drop_duplicates("vehicle_serialnumber",keep='first')
 
 edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 #edges_df.to_csv(export_edges_ordered,index=False)
@@ -37,7 +37,7 @@ edges_df = edges_df.groupby(["vehicle_serialnumber"],sort = False)
 for index,row in vehicles.iterrows():
     temp = pd.DataFrame(edges_df.get_group(row["vehicle_serialnumber"]))
     temp[["timestamp"]] = pd.datetime(temp[["timestamp"]])
-    temp.sort('timestamp').to_csv(export_vehicle + row["vehicle_serialnumber"] + "_edges.csv", index=False)
+    temp.sort_values(by = 'timestamp').to_csv(export_vehicle + row["vehicle_serialnumber"] + "_edges.csv", index=False)
     print row["vehicle_serialnumber"]
 print "grouping and ordering is ready"
 
