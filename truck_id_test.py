@@ -70,7 +70,7 @@ for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=co
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
         #chunk.to_csv(export_electric_erros_distinct_errors_codes, mode='a', header=False)
-        el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).dropna(how = "any").drop_duplicates("s_errorcode",keep='first')
+        el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).dropna(how = "any").drop_duplicates()
     print "chunk " + str(i) + " has processed!"
     i = i + 1
 el_f_df.to_csv(export_electric_erros_distinct_errors_codes,index=False)
