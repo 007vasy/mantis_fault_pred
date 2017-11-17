@@ -83,15 +83,15 @@ colnames_sap_xml = [ "exclude", "serialnumber", "exclude",
 
 # big file ready
 
-sap_txt_fault = pd.read_csv(path_to_sap_txt_csv, parse_dates=True, names=colnames_sap_txt, skiprows=1)
-
-cols = [c for c in sap_txt_fault.columns if c.lower()[:7] != 'exclude']
-
-sap_txt_fault = sap_txt_fault[cols]
-
-print sap_txt_fault.columns
-#TODO rename na exchange part number in the first phase in second phase use NLP for making sub categories
-sap_txt_fault.drop_duplicates(keep='first').dropna(how = "any").to_csv(export_sap_txt_fails_codes,index=False)
+# sap_txt_fault = pd.read_csv(path_to_sap_txt_csv, parse_dates=True, names=colnames_sap_txt, skiprows=1)
+#
+# cols = [c for c in sap_txt_fault.columns if c.lower()[:7] != 'exclude']
+#
+# sap_txt_fault = sap_txt_fault[cols]
+#
+# print sap_txt_fault.columns
+# #TODO rename na exchange part number in the first phase in second phase use NLP for making sub categories
+# sap_txt_fault.drop_duplicates(keep='first').dropna(how = "any").to_csv(export_sap_txt_fails_codes,index=False)
 
 #######################################################################################################################
 
@@ -103,6 +103,17 @@ sap_txt_fault.drop_duplicates(keep='first').dropna(how = "any").to_csv(export_sa
 #
 # print sap_xml_fault.columns
 
-#sap_xml_fault.drop_duplicates(keep='first').to_csv(export_sap_xml_fails_codes)
+#
+# sap_xml_fault.drop_duplicates(keep='first').to_csv(export_sap_xml_fails_codes)
 #######################################################################################################################
 
+sap_txt_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/distinct_electric_errors_truck_ID.csv")
+sap_xml_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_txt_truck_ID.csv")
+el_err_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_xml_truck_ID.csv")
+
+
+pd.merge(sap_txt_truck_ID_df,el_err_truck_ID_df).to_csv("/home/vassb/fault_pred_data/inner_join_txt_el_truck_ID.csv",index=False)
+sap_df = pd.merge(sap_txt_truck_ID_df,sap_xml_truck_ID_df)
+sap_df.to_csv("/home/vassb/fault_pred_data/inner_join_txt_xml_truck_ID.csv",index=False)
+pd.merge(el_err_truck_ID_df,sap_xml_truck_ID_df).to_csv("/home/vassb/fault_pred_data/inner_join_el_xml_truck_ID.csv",index=False)
+pd.merge(sap_df,el_err_truck_ID_df).to_csv("/home/vassb/fault_pred_data/inner_join_all_truck_ID.csv",index=False)
