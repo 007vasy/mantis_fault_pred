@@ -26,7 +26,7 @@ export_sap_xml_fails_codes = "/home/vassb/fault_pred_data/sap_xml_truck_ID.csv"
 #######################################################################################################################
 colnames_electric_errors = ["exclude",
             "exclude",
-            "vehicle_serialnumber",
+            "serialnumber",
             "exclude",
             "exclude",
             "exclude"]
@@ -50,74 +50,66 @@ colnames_sap_xml = [ "exclude", "serialnumber", "exclude",
             "exclude", "exclude"]
 
 #big file dropping
-# flag = 0
-# chunksize = 10 ** 6
-#
-# print "boo!"
-#
-# i = 1
-#
-# for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=colnames_electric_errors, skiprows=1,
-#                          chunksize=chunksize):
-#     print "chunk " + str(i) + " processing started!"
-#     if flag == 0:
-#         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
-#         chunk = chunk[cols]
-#         #chunk.to_csv(export_electric_erros_distinct_errors_codes)
-#         flag = 1
-#         el_f_df = chunk.dropna(how = "any").drop_duplicates()
-#     else:
-#         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
-#         chunk = chunk[cols]
-#         #chunk.to_csv(export_electric_erros_distinct_errors_codes, mode='a', header=False)
-#         el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).dropna(how = "any").drop_duplicates()
-#     print "chunk " + str(i) + " has processed!"
-#     i = i + 1
-# el_f_df.to_csv(export_electric_erros_distinct_errors_codes,index=False)
-# print "process ready"
-#
-# el_truck_ID = pd.read_csv(export_electric_erros_distinct_errors_codes)
-#
-# el_truck_ID.drop_duplicates().to_csv(export_electric_erros_distinct_errors_codes)
-#######################################################################################################################
+flag = 0
+chunksize = 10 ** 6
 
-# big file ready
+print "boo!"
 
-# sap_txt_fault = pd.read_csv(path_to_sap_txt_csv, parse_dates=True, names=colnames_sap_txt, skiprows=1)
-#
-# cols = [c for c in sap_txt_fault.columns if c.lower()[:7] != 'exclude']
-#
-# sap_txt_fault = sap_txt_fault[cols]
-#
-# print sap_txt_fault.columns
-# #TODO rename na exchange part number in the first phase in second phase use NLP for making sub categories
-# sap_txt_fault.drop_duplicates(keep='first').dropna(how = "any").to_csv(export_sap_txt_fails_codes,index=False)
+i = 1
 
-#######################################################################################################################
+for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=colnames_electric_errors, skiprows=1,
+                         chunksize=chunksize):
+    print "chunk " + str(i) + " processing started!"
+    if flag == 0:
+        cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
+        chunk = chunk[cols]
+        #chunk.to_csv(export_electric_erros_distinct_errors_codes,index=False)
+        flag = 1
+        el_f_df = chunk.dropna(how = "any").drop_duplicates()
+    else:
+        cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
+        chunk = chunk[cols]
+        #chunk.to_csv(export_electric_erros_distinct_errors_codes, mode='a', header=False)
+        el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).dropna(how = "any").drop_duplicates()
+    print "chunk " + str(i) + " has processed!"
+    i = i + 1
+el_f_df.drop_duplicates().to_csv(export_electric_erros_distinct_errors_codes,index=False)
+print "process ready"
 
-# sap_xml_fault = pd.read_csv(path_to_sap_xml_csv,parse_dates=True, names=colnames_sap_xml, skiprows=1)
-#
-# cols = [c for c in sap_xml_fault.columns if c.lower()[:7] != "exclude"]
-#
-# sap_xml_fault = sap_xml_fault[cols]
-#
-# print sap_xml_fault.columns
+el_truck_ID = pd.read_csv(export_electric_erros_distinct_errors_codes)
 
-#
-# sap_xml_fault.drop_duplicates(keep='first').to_csv(export_sap_xml_fails_codes)
-#######################################################################################################################
+el_truck_ID.drop_duplicates().to_csv(export_electric_erros_distinct_errors_codes)
+######################################################################################################################
+
+#big file ready
+
+sap_txt_fault = pd.read_csv(path_to_sap_txt_csv, parse_dates=True, names=colnames_sap_txt, skiprows=1)
+
+cols = [c for c in sap_txt_fault.columns if c.lower()[:7] != 'exclude']
+
+sap_txt_fault = sap_txt_fault[cols]
+
+print sap_txt_fault.columns
+#TODO rename na exchange part number in the first phase in second phase use NLP for making sub categories
+sap_txt_fault.drop_duplicates(keep='first').dropna(how = "any").to_csv(export_sap_txt_fails_codes,index=False)
+
+######################################################################################################################
+
+sap_xml_fault = pd.read_csv(path_to_sap_xml_csv,parse_dates=True, names=colnames_sap_xml, skiprows=1)
+
+cols = [c for c in sap_xml_fault.columns if c.lower()[:7] != "exclude"]
+
+sap_xml_fault = sap_xml_fault[cols]
+
+print sap_xml_fault.columns
+
+
+sap_xml_fault.drop_duplicates(keep='first').to_csv(export_sap_xml_fails_codes,index=False)
+######################################################################################################################
 
 sap_txt_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/distinct_electric_errors_truck_ID.csv")
 sap_xml_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_txt_truck_ID.csv")
 el_err_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_xml_truck_ID.csv")
-
-print el_err_truck_ID_df.columns
-print sap_xml_truck_ID_df.columns
-print sap_txt_truck_ID_df.columns
-
-sap_txt_truck_ID_df = sap_txt_truck_ID_df.loc[:,"serialnumber"]
-el_err_truck_ID_df = el_err_truck_ID_df.loc[:,"vehicle_serialnumber"]
-el_err_truck_ID_df.columns = sap_xml_truck_ID_df.columns
 
 print el_err_truck_ID_df.columns
 print sap_xml_truck_ID_df.columns
