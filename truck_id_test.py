@@ -110,7 +110,7 @@ colnames_sap_xml = [ "exclude", "serialnumber", "exclude",
 sap_txt_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/distinct_electric_errors_truck_ID.csv")
 sap_xml_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_txt_truck_ID.csv")
 el_err_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_xml_truck_ID.csv")
-
+el_err_truck_ID_df.columns = sap_xml_truck_ID_df.columns
 
 pd.merge(sap_txt_truck_ID_df,el_err_truck_ID_df).to_csv("/home/vassb/fault_pred_data/inner_join_txt_el_truck_ID.csv",index=False)
 sap_df = pd.merge(sap_txt_truck_ID_df,sap_xml_truck_ID_df)
