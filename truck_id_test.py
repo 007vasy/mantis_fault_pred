@@ -31,7 +31,7 @@ colnames_electric_errors = ["exclude",
             "exclude",
             "exclude"]
 
-colnames_sap_txt = ["exclude", "serialnumber", "exclude",
+colnames_sap_txt = ["exclude", "exclude", "serialnumber", "exclude",
             "exclude",   "exclude", "exclude",
             "exclude",  "exclude", "exclude", "exclude",
             "exclude",
@@ -50,35 +50,35 @@ colnames_sap_xml = [ "exclude", "serialnumber", "exclude",
             "exclude", "exclude"]
 
 #big file dropping
-flag = 0
-chunksize = 10 ** 6
-
-print "boo!"
-
-i = 1
-
-for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=colnames_electric_errors, skiprows=1,
-                         chunksize=chunksize):
-    print "chunk " + str(i) + " processing started!"
-    if flag == 0:
-        cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
-        chunk = chunk[cols]
-        #chunk.to_csv(export_electric_erros_distinct_errors_codes)
-        flag = 1
-        el_f_df = chunk.dropna(how = "any").drop_duplicates()
-    else:
-        cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
-        chunk = chunk[cols]
-        #chunk.to_csv(export_electric_erros_distinct_errors_codes, mode='a', header=False)
-        el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).dropna(how = "any").drop_duplicates()
-    print "chunk " + str(i) + " has processed!"
-    i = i + 1
-el_f_df.to_csv(export_electric_erros_distinct_errors_codes,index=False)
-print "process ready"
-
-el_truck_ID = pd.read_csv(export_electric_erros_distinct_errors_codes)
-
-el_truck_ID.drop_duplicates().to_csv(export_electric_erros_distinct_errors_codes)
+# flag = 0
+# chunksize = 10 ** 6
+#
+# print "boo!"
+#
+# i = 1
+#
+# for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=colnames_electric_errors, skiprows=1,
+#                          chunksize=chunksize):
+#     print "chunk " + str(i) + " processing started!"
+#     if flag == 0:
+#         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
+#         chunk = chunk[cols]
+#         #chunk.to_csv(export_electric_erros_distinct_errors_codes)
+#         flag = 1
+#         el_f_df = chunk.dropna(how = "any").drop_duplicates()
+#     else:
+#         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
+#         chunk = chunk[cols]
+#         #chunk.to_csv(export_electric_erros_distinct_errors_codes, mode='a', header=False)
+#         el_f_df = pd.concat([el_f_df,chunk],ignore_index=True).dropna(how = "any").drop_duplicates()
+#     print "chunk " + str(i) + " has processed!"
+#     i = i + 1
+# el_f_df.to_csv(export_electric_erros_distinct_errors_codes,index=False)
+# print "process ready"
+#
+# el_truck_ID = pd.read_csv(export_electric_erros_distinct_errors_codes)
+#
+# el_truck_ID.drop_duplicates().to_csv(export_electric_erros_distinct_errors_codes)
 #######################################################################################################################
 
 # big file ready
@@ -95,14 +95,14 @@ sap_txt_fault.drop_duplicates(keep='first').dropna(how = "any").to_csv(export_sa
 
 #######################################################################################################################
 
-sap_xml_fault = pd.read_csv(path_to_sap_xml_csv,parse_dates=True, names=colnames_sap_xml, skiprows=1)
+# sap_xml_fault = pd.read_csv(path_to_sap_xml_csv,parse_dates=True, names=colnames_sap_xml, skiprows=1)
+#
+# cols = [c for c in sap_xml_fault.columns if c.lower()[:7] != "exclude"]
+#
+# sap_xml_fault = sap_xml_fault[cols]
+#
+# print sap_xml_fault.columns
 
-cols = [c for c in sap_xml_fault.columns if c.lower()[:7] != "exclude"]
-
-sap_xml_fault = sap_xml_fault[cols]
-
-print sap_xml_fault.columns
-
-sap_xml_fault.drop_duplicates(keep='first').to_csv(export_sap_xml_fails_codes)
+#sap_xml_fault.drop_duplicates(keep='first').to_csv(export_sap_xml_fails_codes)
 #######################################################################################################################
 
