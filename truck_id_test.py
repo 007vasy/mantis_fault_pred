@@ -65,7 +65,7 @@ for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=co
         chunk = chunk[cols]
         #chunk.to_csv(export_electric_erros_distinct_errors_codes)
         flag = 1
-        el_f_df = chunk.dropna(how = "any").drop_duplicates("s_errorcode")
+        el_f_df = chunk.dropna(how = "any").drop_duplicates()
     else:
         cols = [c for c in chunk.columns if c.lower()[:7] != 'exclude']
         chunk = chunk[cols]
@@ -75,6 +75,10 @@ for chunk in pd.read_csv(path_to_electric_errors_csv, parse_dates=True, names=co
     i = i + 1
 el_f_df.to_csv(export_electric_erros_distinct_errors_codes,index=False)
 print "process ready"
+
+el_truck_ID = pd.read_csv(export_electric_erros_distinct_errors_codes)
+
+el_truck_ID.drop_duplicates().to_csv(export_electric_erros_distinct_errors_codes)
 #######################################################################################################################
 
 # big file ready
