@@ -111,8 +111,8 @@ sap_txt_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/distinct_electric
 sap_xml_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_txt_truck_ID.csv")
 el_err_truck_ID_df = pd.read_csv("/home/vassb/fault_pred_data/sap_xml_truck_ID.csv")
 
-sap_txt_truck_ID_df = sap_txt_truck_ID_df["serialnumber"]
-el_err_truck_ID_df = el_err_truck_ID_df["vehicle_serialnumber"]
+sap_txt_truck_ID_df = sap_txt_truck_ID_df[["serialnumber"]]
+el_err_truck_ID_df = el_err_truck_ID_df[["vehicle_serialnumber"]]
 el_err_truck_ID_df.columns = sap_xml_truck_ID_df.columns
 
 print el_err_truck_ID_df.columns
