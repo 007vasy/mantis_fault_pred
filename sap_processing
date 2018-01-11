@@ -12,8 +12,11 @@ colnames = ["internal", "customers STILL Sales Unit", "serialnumber", "service o
             "exchange part number", "exchange part name", "internal", "internal", "internal", "internal",
             "trucks production company", "truck type", "truck year of construction", "truck purchase date",
             "service technician technical comment", "service technician internal comment", "internal", "internal"]
-sap_fault = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/ServiceReportSAPExtrakt_FLMxFahrzeuge.txt',
-                        sep="\t", error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1)
+# sap_fault = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/ServiceReportSAPExtrakt_FLMxFahrzeuge.txt',
+#                         sep="\t", error_bad_lines=False, parse_dates=True, names=colnames, skiprows=1)
+sap_fault = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/SAP_data/UTF8-tabseperated-ServiceReportSAPExtrakt_FLMxFahrzeuge.txt',
+                        sep="\t", error_bad_lines=False)
+
 # print sap_fault
 
 print sap_fault.describe()
@@ -26,3 +29,6 @@ sap_fault = sap_fault[cols]
 print sap_fault.columns
 
 sap_fault.to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/sap_txt.csv",index=False)
+
+for i in sap_fault.columns:
+    print sap_fault[i].head(10)
