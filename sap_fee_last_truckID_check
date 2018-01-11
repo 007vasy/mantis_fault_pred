@@ -1,0 +1,24 @@
+import pandas as pd
+sap_fee_last = pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/SAP_data_last2017/UTF8-tabseperated-ALL-ServiceReportSAPExtrakt_FLMxFahrzeuge.txt',
+                        sep="\t", error_bad_lines=False)
+el_err_truck_ID= pd.read_csv('/media/vasy/Data/Doksik/Learn/thesis/fault_pred/tidy_data/distinct_electric_errors_truck_ID.csv')
+
+sap_fee_last.head()
+
+sap_fee_last_truckID = sap_fee_last["Serialnummer"].dropna(how = "any").drop_duplicates()
+
+sap_fee_last_truckID.head()
+
+pd.merge(pd.Series.to_frame(sap_fee_last_truckID),pd.Series.to_frame(el_err_truck_ID["serialnumber"]), left_on="Serialnummer", right_on='serialnumber'
+).to_csv("/media/vasy/Data/Doksik/Learn/thesis/fault_pred/tidy_data/fee_last2017_truckIDtest.csv",index=False)
+
+#print el_err_truck_ID_df.columns
+#print sap_xml_truck_ID_df.columns
+#print sap_txt_truck_ID_df.columns
+
+#pd.merge(sap_txt_truck_ID_df,el_err_truck_ID_df).to_csv("/home/vassb/fault_pred_data/inner_join_txt_el_truck_ID.csv",index=False)
+#sap_df = pd.merge(sap_txt_truck_ID_df,sap_xml_truck_ID_df)
+#sap_df.to_csv("/home/vassb/fault_pred_data/inner_join_txt_xml_truck_ID.csv",index=False)
+#pd.merge(el_err_truck_ID_df,sap_xml_truck_ID_df).to_csv("/home/vassb/fault_pred_data/inner_join_el_xml_truck_ID.csv",index=False)
+#pd.merge(sap_df,el_err_truck_ID_df).to_csv("/home/vassb/fault_pred_data/inner_join_all_truck_ID.csv",index=False)
+
